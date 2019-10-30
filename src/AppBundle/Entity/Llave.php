@@ -37,6 +37,12 @@ class Llave
     private $fechaPrestamo;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Dependencia")
+     * @var Dependencia
+     */
+    private $dependencia;
+
+    /**
      * @return int
      */
     public function getId()
@@ -95,6 +101,24 @@ class Llave
     public function setFechaPrestamo($fechaPrestamo)
     {
         $this->fechaPrestamo = $fechaPrestamo;
+        return $this;
+    }
+
+    /**
+     * @return Dependencia
+     */
+    public function getDependencia()
+    {
+        return $this->dependencia;
+    }
+
+    /**
+     * @param Dependencia $dependencia
+     * @return Llave
+     */
+    public function setDependencia($dependencia)
+    {
+        $this->dependencia = $dependencia;
         return $this;
     }
 }
