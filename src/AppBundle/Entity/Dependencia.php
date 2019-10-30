@@ -25,6 +25,12 @@ class Dependencia
      */
     private $descripcion;
 
+    public function __toString()
+    {
+        return $this->getDescripcion();
+    }
+
+
     /**
      * @return int
      */
