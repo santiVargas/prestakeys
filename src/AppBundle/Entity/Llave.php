@@ -37,7 +37,7 @@ class Llave
     private $fechaPrestamo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dependencia")
+     * @ORM\ManyToOne(targetEntity="Dependencia", inversedBy="llaves")
      * @var Dependencia
      */
     private $dependencia;

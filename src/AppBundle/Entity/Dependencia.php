@@ -3,6 +3,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,6 +25,20 @@ class Dependencia
      * @var string
      */
     private $descripcion;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Llave", mappedBy="dependencia")
+     * @var Llave[]
+     */
+    private $llaves;
+
+    /**
+     * Dependencia constructor.
+     */
+    public function __construct()
+    {
+        $this->llaves = new ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -56,5 +71,24 @@ class Dependencia
         $this->descripcion = $descripcion;
         return $this;
     }
+
+    /**
+     * @return Llave[]
+     */
+    public function getLlaves()
+    {
+        return $this->llaves;
+    }
+
+    /**
+     * @param Llave[] $llaves
+     * @return Dependencia
+     */
+    public function setLlaves($llaves)
+    {
+        $this->llaves = $llaves;
+        return $this;
+    }
+
 }
 
