@@ -35,4 +35,66 @@ class Llave
      * @var \DateTime
      */
     private $fechaPrestamo;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * @param string $descripcion
+     * @return Llave
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
+    }
+
+    /**
+     * @param string $codigo
+     * @return Llave
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getFechaPrestamo()
+    {
+        return $this->fechaPrestamo;
+    }
+
+    /**
+     * @param \DateTime $fechaPrestamo
+     * @return Llave
+     */
+    public function setFechaPrestamo($fechaPrestamo)
+    {
+        $this->fechaPrestamo = $fechaPrestamo;
+        return $this;
+    }
 }
