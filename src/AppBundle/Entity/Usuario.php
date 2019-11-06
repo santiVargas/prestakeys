@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +42,21 @@ class Usuario
      * @var bool
      */
     private $secretario;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Llave", mappedBy="usuario")
+     * @var Llave[]
+     */
+    private $llavesPrestadas;
+
+    /**
+     * Usuario constructor.
+     */
+    public function __construct()
+    {
+        $this->llavesPrestadas = new ArrayCollection();
+    }
+
 
     /**
      * @return int
@@ -122,4 +138,21 @@ class Usuario
         return $this;
     }
 
+    /**
+     * @return Llave[]
+     */
+    public function getLlavesPrestadas()
+    {
+        return $this->llavesPrestadas;
+    }
+
+    /**
+     * @param Llave[] $llavesPrestadas
+     * @return Usuario
+     */
+    public function setLlavesPrestadas($llavesPrestadas)
+    {
+        $this->llavesPrestadas = $llavesPrestadas;
+        return $this;
+    }
 }
