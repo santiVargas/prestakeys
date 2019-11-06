@@ -33,11 +33,18 @@ class Dependencia
     private $llaves;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Usuario")
+     * @var Usuario[]
+     */
+    private $responsables;
+
+    /**
      * Dependencia constructor.
      */
     public function __construct()
     {
         $this->llaves = new ArrayCollection();
+        $this->responsables = new ArrayCollection();
     }
 
     public function __toString()
@@ -90,5 +97,22 @@ class Dependencia
         return $this;
     }
 
+    /**
+     * @return Usuario[]
+     */
+    public function getResponsables()
+    {
+        return $this->responsables;
+    }
+
+    /**
+     * @param Usuario[] $responsables
+     * @return Dependencia
+     */
+    public function setResponsables($responsables)
+    {
+        $this->responsables = $responsables;
+        return $this;
+    }
 }
 
