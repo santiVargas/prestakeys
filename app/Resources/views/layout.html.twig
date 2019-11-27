@@ -3,11 +3,12 @@
 {% block body %}
     <nav class="navbar navbar-dark navbar-expand-md sticky-top bg-dark">
         <a class="navbar-brand" href="{{ path('portada') }}"><i class="fas fa-key"></i> PrestaKeys</a>
+        {% set nombre = app.request.get('_route') %}
         <ul class="navbar-nav">
-            <li>
+            <li{% if nombre == 'portada' %} class="active"{% endif %}>
                 <a class="nav-link" href="{{ path('portada') }}"><i class="fas fa-home"></i> Portada</a>
             </li>
-            <li>
+            <li{% if nombre starts with 'dependencia' %} class="active"{% endif %}>
                 <a class="nav-link" href="{{ path('dependencia_listar') }}"><i class="fas fa-door-open"></i> Dependencias</a>
             </li>
         </ul>
