@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Listado de dependencias
+{% endblock %}
+
+{% block content %}
+    <h1>Listado de dependencias</h1>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id.</th>
+                <th>Descripcion</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dependencia in dependencias %}
+            <tr>
+                <td>{{ dependencia.id }}</td>
+                <td>{{ dependencia.descripcion }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+
