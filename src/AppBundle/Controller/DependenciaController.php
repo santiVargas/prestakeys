@@ -13,7 +13,7 @@ class DependenciaController extends Controller
      */
     public function indexAction(DependenciaRepository $dependenciaRepository)
     {
-        $dependencias = $dependenciaRepository->findAll();
+        $dependencias = $dependenciaRepository->findAllOrdenadas();
 
         return $this->render('dependencia/listar.html.twig', [
             'dependencias' => $dependencias
