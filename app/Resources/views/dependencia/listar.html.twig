@@ -9,15 +9,15 @@
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
-                <th>Id.</th>
                 <th>Descripcion</th>
+                <th>Responsables</th>
             </tr>
         </thead>
         <tbody>
         {% for dependencia in dependencias %}
             <tr>
-                <td>{{ dependencia.id }}</td>
                 <td>{{ dependencia.descripcion }}</td>
+                <td>{{ dependencia.responsables|join(', ')|default('No tiene') }}</td>
             </tr>
         {% endfor %}
         </tbody>
