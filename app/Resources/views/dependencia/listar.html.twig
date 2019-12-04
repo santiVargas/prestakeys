@@ -16,7 +16,7 @@
         <tbody>
         {% for dependencia in dependencias %}
             <tr>
-                <td>{{ dependencia.descripcion }}</td>
+                <td><a href="{{ path('dependencia_llaves_listar', {'id': dependencia.id}) }}">{{ dependencia.descripcion }}</a></td>
                 <td>{{ dependencia.responsables|join(', ')|default('No tiene') }}</td>
             </tr>
         {% endfor %}
