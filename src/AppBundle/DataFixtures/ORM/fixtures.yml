@@ -1,0 +1,40 @@
+AppBundle\Entity\Dependencia:
+  dependencia_salaprofesores:
+    descripcion: Sala de profesores
+    responsables: "1x @ordenanza_*"
+  dependencia_aula{1..10}:
+    descripcion: 'Aula <current()>'
+    responsables: "<numberBetween(0,2)>x @ordenanza_*"
+  dependencia_departamento{1..10}:
+    descripcion: 'Departamento <current()>'
+
+AppBundle\Entity\Llave:
+  llave_salaprofesores:
+    descripcion: 'Llave principal'
+    codigo (unique): '<randomNumber(6)>'
+    dependencia: '@dependencia_salaprofesores'
+  llave_aula{1..10}:
+    descripcion: 'Llave principal'
+    codigo (unique): '<randomNumber(6)>'
+    dependencia: '@dependencia_aula<current()>'
+  llave_departamento{1..10}:
+    descripcion: 'Llave principal'
+    codigo (unique): '<randomNumber(6)>'
+    dependencia: '@dependencia_departamento<current()>'
+
+AppBundle\Entity\Usuario:
+  pepe:
+    nombre: Pepe
+    apellidos: Gotera Gotera
+    ordenanza: true
+    secretario: false
+  ordenanza_{1..3}:
+    nombre: <es_ES:firstName()>
+    apellidos: '<es_ES:lastName()> <es_ES:lastName()>'
+    ordenanza: true
+    secretario: false
+  secretario:
+    nombre: Secretario
+    apellidos: '<es_ES:lastName()> <es_ES:lastName()>'
+    ordenanza: false
+    secretario: true
