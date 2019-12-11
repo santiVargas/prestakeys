@@ -38,6 +38,7 @@ class Llave
 
     /**
      * @ORM\ManyToOne(targetEntity="Dependencia", inversedBy="llaves")
+     * @ORM\JoinColumn(nullable=false)
      * @var Dependencia
      */
     private $dependencia;
