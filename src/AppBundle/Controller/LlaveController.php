@@ -23,6 +23,17 @@ class LlaveController extends Controller
             'llaves' => $llaves
         ]);
     }
+    /**
+     * @Route("/llave/nueva", name="llave_nueva", methods={"GET", "POST"})
+     */
+    public function nuevaAction(Request $request)
+    {
+        $nuevaLlave = new Llave();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($nuevaLlave);
+
+        return $this->formAction($request, $nuevaLlave);
+    }
 
     /**
      * @Route("/llave/{id}", name="llave_form", methods={"GET", "POST"})
