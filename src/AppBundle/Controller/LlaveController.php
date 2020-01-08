@@ -36,7 +36,8 @@ class LlaveController extends Controller
     }
 
     /**
-     * @Route("/llave/{id}", name="llave_form", methods={"GET", "POST"})
+     * @Route("/llave/{id}", name="llave_form",
+     *     requirements={"id"="\d+"}, methods={"GET", "POST"})
      */
     public function formAction(Request $request, Llave $llave)
     {
@@ -56,6 +57,29 @@ class LlaveController extends Controller
         }
         return $this->render('llave/form.html.twig', [
             'form' => $form->createView(),
+            'llave' => $llave
+        ]);
+    }
+
+    /**
+     * @Route("/llave/eliminar/{id}", name="llave_eliminar", methods={"GET", "POST"})
+     */
+    public function eliminarAction(Request $request, Llave $llave)
+    {
+        if ($request->getMethod() == 'POST') {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($llave);
+                $em->flush();
+                $this->addFlash('success', 'Llave eliminada con éxito');
+                return $this->redirectToRoute('llave_listar');
+            }
+            catch (\Exception $e) {
+                $this->addFlash('error', 'Ha ocurrido un error al eliminar la llave');
+                return $this->redirectToRoute('llave_form', ['id' => $llave->getId()]);
+            }
+        }
+        return $this->render('llave/eliminar.html.twig', [
             'llave' => $llave
         ]);
     }
