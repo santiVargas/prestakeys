@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Listado de llaves
+{% endblock %}
+
+{% block content %}
+    <h1>Llaves</h1>
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Dependencia</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for llave in llaves %}
+                <tr>
+                    <td><a href="{{ path('llave_form', {'id': llave.id}) }}">{{ llave.codigo }}</a></td>
+                    <td>{{ llave.dependencia }}</td>
+                    <td>{{ llave.descripcion }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
