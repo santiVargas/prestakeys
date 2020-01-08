@@ -44,7 +44,8 @@ class LlaveController extends Controller
             }
         }
         return $this->render('llave/form.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'llave' => $llave
         ]);
     }
 }
