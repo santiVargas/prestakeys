@@ -36,10 +36,11 @@ class LlaveController extends Controller
             try {
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
+                $this->addFlash('success', 'Cambios en la llave guardados con éxito');
                 return $this->redirectToRoute('llave_listar');
             }
             catch(\Exception $e) {
-
+                $this->addFlash('error', 'Ha ocurrido un error al guardar los cambios');
             }
         }
         return $this->render('llave/form.html.twig', [
