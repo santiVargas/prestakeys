@@ -11,6 +11,7 @@
             <tr>
                 <th>Descripcion</th>
                 <th>Responsables</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
             <tr>
                 <td><a href="{{ path('dependencia_form', {'id': dependencia.id}) }}">{{ dependencia.descripcion }}</a></td>
                 <td>{{ dependencia.responsables|join(', ')|default('No tiene') }}</td>
+                <td><a href="{{ path('dependencia_llaves_listar', {'id': dependencia.id}) }}" class="btn btn-sm btn-info"><i class="fa fa-key"></i> Llaves</a></td>
             </tr>
         {% endfor %}
         </tbody>
