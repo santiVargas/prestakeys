@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Listado de usuarios
+{% endblock %}
+
+{% block content %}
+    <h1>Listado de usuarios <a href="{{ path('usuario_nuevo') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo usuario</a></h1>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Apellidos</th>
+                <th>Nombre</th>
+                <th>¿Ordenanza?</th>
+                <th>¿Secretario?</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for usuario in usuarios %}
+            <tr>
+                <td><a href="{{ path('usuario_form', {'id': usuario.id}) }}">{{ usuario.apellidos }}</a></td>
+                <td><a href="{{ path('usuario_form', {'id': usuario.id}) }}">{{ usuario.nombre }}</a></td>
+                <td>{{ usuario.ordenanza ? "Sí" : "No" }}</td>
+                <td>{% if usuario.secretario %}Sí{% else %}No{% endif %}</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+
