@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -20,12 +21,15 @@ class Llave
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      * @var string
      */
     private $descripcion;
 
     /**
      * @ORM\Column(type="string", length=10, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=1, max=10)
      * @var string
      */
     private $codigo;
@@ -39,6 +43,7 @@ class Llave
     /**
      * @ORM\ManyToOne(targetEntity="Dependencia", inversedBy="llaves")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      * @var Dependencia
      */
     private $dependencia;
