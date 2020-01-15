@@ -14,10 +14,28 @@ class LlaveRepository extends ServiceEntityRepository
         parent::__construct($registry, Llave::class);
     }
 
-    public function findAllOrdenadosPorCodigo()
+    public function findAllOrdenadasPorCodigo()
     {
         return $this->createQueryBuilder('l')
             ->orderBy('l.codigo')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findPrestadasOrdenadasPorCodigo()
+    {
+        return $this->createQueryBuilder('l')
+            ->orderBy('l.codigo')
+            ->where('l.usuario IS NOT NULL')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findNoPrestadasOrdenadasPorCodigo()
+    {
+        return $this->createQueryBuilder('l')
+            ->orderBy('l.codigo')
+            ->where('l.usuario IS NULL')
             ->getQuery()
             ->getResult();
     }

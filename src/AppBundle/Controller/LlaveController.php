@@ -13,14 +13,26 @@ class LlaveController extends Controller
 {
 
     /**
-     * @Route("/llaves", name="llave_listar")
+     * @Route("/llaves/{filtro}", name="llave_listar",
+     *      requirements={"filtro": "0|1|2"})
      */
-    public function indexAction(LlaveRepository $llaveRepository)
+    public function indexAction(LlaveRepository $llaveRepository, $filtro = 0)
     {
-        $llaves = $llaveRepository->findAllOrdenadosPorCodigo();
+        switch ($filtro) {
+            case 0:
+                $llaves = $llaveRepository->findAllOrdenadasPorCodigo();
+                break;
+            case 1:
+                $llaves = $llaveRepository->findPrestadasOrdenadasPorCodigo();
+                break;
+            case 2:
+                $llaves = $llaveRepository->findNoPrestadasOrdenadasPorCodigo();
+                break;
+        }
 
         return $this->render('llave/listar.html.twig', [
-            'llaves' => $llaves
+            'llaves' => $llaves,
+            'filtro' => $filtro
         ]);
     }
     /**

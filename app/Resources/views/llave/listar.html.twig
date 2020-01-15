@@ -7,6 +7,12 @@
 {% block content %}
     <h1>Llaves <a href="{{ path('llave_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva llave</a></h1>
 
+    <div class="btn-group filtros">
+        <a href="{{ path('llave_listar') }}" class="btn btn-{{ filtro == 0 ? "primary" : "info" }}">Todas</a>
+        <a href="{{ path('llave_listar', {'filtro': 1}) }}" class="btn btn-{{ filtro == 1 ? "primary" : "info" }}">Prestadas</a>
+        <a href="{{ path('llave_listar', {'filtro': 2}) }}" class="btn btn-{{ filtro == 2 ? "primary" : "info" }}">No prestadas</a>
+    </div>
+
     <table class="table table-bordered table-hover table-striped">
         <thead>
             <tr>
