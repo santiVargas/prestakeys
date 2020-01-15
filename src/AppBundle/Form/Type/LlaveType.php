@@ -4,6 +4,7 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Dependencia;
 use AppBundle\Entity\Llave;
+use AppBundle\Entity\Usuario;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -25,6 +26,12 @@ class LlaveType extends AbstractType
             ->add('dependencia', EntityType::class, [
                 'class' => Dependencia::class,
                 'label' => 'Pertenece a'
+            ])
+            ->add('usuario', EntityType::class, [
+                'class' => Usuario::class,
+                'label' => 'Prestada a',
+                'required' => false,
+                'placeholder' => 'Nadie'
             ]);
     }
 

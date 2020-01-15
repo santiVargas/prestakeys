@@ -13,6 +13,7 @@
                 <th>Código</th>
                 <th>Dependencia</th>
                 <th>Descripción</th>
+                <th>Prestada a</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,11 @@
                     <td><a href="{{ path('llave_form', {'id': llave.id}) }}">{{ llave.codigo }}</a></td>
                     <td>{{ llave.dependencia }}</td>
                     <td>{{ llave.descripcion }}</td>
+                    <td>
+                        {% if llave.usuario %}
+                            {{ llave.usuario }}
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
