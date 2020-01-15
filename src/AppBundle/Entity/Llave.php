@@ -54,6 +54,11 @@ class Llave
      */
     private $usuario;
 
+    public function __toString()
+    {
+        return $this->getCodigo() . ' - ' . $this->getDescripcion();
+    }
+
     /**
      * @return int
      */

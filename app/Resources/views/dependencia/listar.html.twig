@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Listado de dependencias</h1>
+    <h1>Listado de dependencias <a href="{{ path('dependencia_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva dependencia</a></h1>
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
@@ -16,7 +16,7 @@
         <tbody>
         {% for dependencia in dependencias %}
             <tr>
-                <td><a href="{{ path('dependencia_llaves_listar', {'id': dependencia.id}) }}">{{ dependencia.descripcion }}</a></td>
+                <td><a href="{{ path('dependencia_form', {'id': dependencia.id}) }}">{{ dependencia.descripcion }}</a></td>
                 <td>{{ dependencia.responsables|join(', ')|default('No tiene') }}</td>
             </tr>
         {% endfor %}
