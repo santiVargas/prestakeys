@@ -17,6 +17,11 @@ security:
                         password: secretario
                         roles: 'ROLE_SECRETARIO'
 
+    role_hierarchy:
+        ROLE_SECRETARIO: ['ROLE_DOCENTE', 'ROLE_GESTOR_PRESTAMOS']
+        ROLE_DOCENTE: 'ROLE_USER'
+        ROLE_ORDENANZA: ['ROLE_GESTOR_PRESTAMOS', 'ROLE_USER']
+
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
 
