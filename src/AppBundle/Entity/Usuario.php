@@ -50,6 +50,20 @@ class Usuario implements UserInterface
     private $secretario;
 
     /**
+     * @ORM\Column(type="string", unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=5)
+     * @var string
+     */
+    private $nombreUsuario;
+
+    /**
+     * @ORM\Column(type="string")
+     * @var string
+     */
+    private $clave;
+
+    /**
      * @ORM\OneToMany(targetEntity="Llave", mappedBy="usuario")
      * @var Llave[]
      */
@@ -163,6 +177,42 @@ class Usuario implements UserInterface
     public function setLlavesPrestadas($llavesPrestadas)
     {
         $this->llavesPrestadas = $llavesPrestadas;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNombreUsuario()
+    {
+        return $this->nombreUsuario;
+    }
+
+    /**
+     * @param string $nombreUsuario
+     * @return Usuario
+     */
+    public function setNombreUsuario($nombreUsuario)
+    {
+        $this->nombreUsuario = $nombreUsuario;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClave()
+    {
+        return $this->clave;
+    }
+
+    /**
+     * @param string $clave
+     * @return Usuario
+     */
+    public function setClave($clave)
+    {
+        $this->clave = $clave;
         return $this;
     }
 
