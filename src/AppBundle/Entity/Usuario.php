@@ -171,7 +171,20 @@ class Usuario implements UserInterface
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        // inicialmente es solo un usuario normal
+        $roles = ['ROLE_USER'];
+
+        if ($this->isOrdenanza()) {
+            $roles[] = 'ROLE_ORDENANZA';
+        } else {
+            $roles[] = 'ROLE_DOCENTE';
+        }
+
+        if ($this->isSecretario()) {
+            $roles[] = 'ROLE_SECRETARIO';
+        }
+
+        return $roles;
     }
 
     /**
