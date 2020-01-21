@@ -7,12 +7,9 @@ security:
         fijos:
             memory:
                 users:
-                    admin:
-                        password: admin
-                        roles: 'ROLE_ADMIN'
-                    usuario:
+                    profesor:
                         password: oretania
-                        roles: 'ROLE_USER'
+                        roles: 'ROLE_DOCENTE'
                     ordenanza:
                         password: ordenanza
                         roles: 'ROLE_ORDENANZA'
