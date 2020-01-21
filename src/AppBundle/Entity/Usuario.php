@@ -242,7 +242,7 @@ class Usuario implements UserInterface
      */
     public function getPassword()
     {
-        // TODO: Implement getPassword() method.
+        return $this->getClave();
     }
 
     /**
@@ -250,7 +250,7 @@ class Usuario implements UserInterface
      */
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        return null;
     }
 
     /**
@@ -258,7 +258,7 @@ class Usuario implements UserInterface
      */
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        return $this->getNombreUsuario();
     }
 
     /**
@@ -266,6 +266,6 @@ class Usuario implements UserInterface
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        // no hacer nada
     }
 }
