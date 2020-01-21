@@ -53,7 +53,9 @@ class LlaveController extends Controller
      */
     public function formAction(Request $request, Llave $llave)
     {
-        $form = $this->createForm(LlaveType::class, $llave);
+        $form = $this->createForm(LlaveType::class, $llave, [
+            'nuevo' => $llave->getId() === null
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

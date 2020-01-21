@@ -26,19 +26,24 @@ class LlaveType extends AbstractType
             ->add('dependencia', EntityType::class, [
                 'class' => Dependencia::class,
                 'label' => 'Pertenece a'
-            ])
-            ->add('usuario', EntityType::class, [
-                'class' => Usuario::class,
-                'label' => 'Prestada a',
-                'required' => false,
-                'placeholder' => 'Nadie'
             ]);
+
+        if ($options['nuevo'] === false) {
+            $builder
+                ->add('usuario', EntityType::class, [
+                    'class' => Usuario::class,
+                    'label' => 'Prestada a',
+                    'required' => false,
+                    'placeholder' => 'Nadie'
+                ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Llave::class
+            'data_class' => Llave::class,
+            'nuevo' => false
         ]);
     }
 
