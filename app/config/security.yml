@@ -4,18 +4,10 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        fijos:
-            memory:
-                users:
-                    profesor:
-                        password: oretania
-                        roles: 'ROLE_DOCENTE'
-                    ordenanza:
-                        password: ordenanza
-                        roles: 'ROLE_ORDENANZA'
-                    secretario:
-                        password: secretario
-                        roles: 'ROLE_SECRETARIO'
+        base_de_datos:
+            entity:
+                class: AppBundle\Entity\Usuario
+                property: nombreUsuario
 
     role_hierarchy:
         ROLE_SECRETARIO: ['ROLE_DOCENTE', 'ROLE_GESTOR_PRESTAMOS']
@@ -23,7 +15,7 @@ security:
         ROLE_ORDENANZA: ['ROLE_GESTOR_PRESTAMOS', 'ROLE_USER']
 
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        AppBundle\Entity\Usuario: plaintext
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
