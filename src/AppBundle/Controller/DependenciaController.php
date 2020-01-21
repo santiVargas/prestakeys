@@ -6,6 +6,7 @@ use AppBundle\Entity\Dependencia;
 use AppBundle\Form\Type\DependenciaType;
 use AppBundle\Repository\DependenciaRepository;
 use AppBundle\Repository\LlaveRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,6 +41,7 @@ class DependenciaController extends Controller
     /**
      * @Route("/dependencia/nueva", name="dependencia_nueva",
      *      methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_SECRETARIO')")
      */
     public function nuevaAction(Request $request)
     {
@@ -55,7 +57,9 @@ class DependenciaController extends Controller
      */
     public function formAction(Request $request, Dependencia $dependencia)
     {
-        $formulario = $this->createForm(DependenciaType::class, $dependencia);
+        $formulario = $this->createForm(DependenciaType::class, $dependencia, [
+            'disabled' => $this->isGranted('ROLE_SECRETARIO') === false
+        ]);
         $formulario->handleRequest($request);
 
         if ($formulario->isSubmitted() && $formulario->isValid()) {
@@ -77,6 +81,7 @@ class DependenciaController extends Controller
 
     /**
      * @Route("/dependencia/eliminar/{id}", name="dependencia_eliminar", methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_SECRETARIO')")
      */
     public function eliminarAction(Request $request, Dependencia $dependencia)
     {
