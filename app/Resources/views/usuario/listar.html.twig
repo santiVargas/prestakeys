@@ -9,8 +9,8 @@
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
-                <th>Apellidos</th>
-                <th>Nombre</th>
+                <th>Nombre de usuario</th>
+                <th>Apellidos y nombre</th>
                 <th>¿Ordenanza?</th>
                 <th>¿Secretario?</th>
                 <th></th>
@@ -19,8 +19,12 @@
         <tbody>
         {% for usuario in usuarios %}
             <tr>
-                <td><a href="{{ path('usuario_form', {'id': usuario.id}) }}">{{ usuario.apellidos }}</a></td>
-                <td><a href="{{ path('usuario_form', {'id': usuario.id}) }}">{{ usuario.nombre }}</a></td>
+                <td><a href="{{ path('usuario_form', {'id': usuario.id}) }}">{{ usuario.nombreUsuario }}</a></td>
+                <td>
+                    <a href="{{ path('usuario_form', {'id': usuario.id}) }}">
+                        {{ usuario.apellidos }}, {{ usuario.nombre }}
+                    </a>
+                </td>
                 <td>{{ usuario.ordenanza ? "Sí" : "No" }}</td>
                 <td>{% if usuario.secretario %}Sí{% else %}No{% endif %}</td>
                 <td></td>
