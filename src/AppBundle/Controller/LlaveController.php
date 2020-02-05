@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Llave;
+use AppBundle\Form\Model\Prestamo;
 use AppBundle\Form\Type\LlaveType;
+use AppBundle\Form\Type\PrestamoType;
 use AppBundle\Repository\LlaveRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -128,6 +130,34 @@ class LlaveController extends Controller
         }
         return $this->render('llave/devolver.html.twig', [
             'llave' => $llave
+        ]);
+    }
+
+
+    /**
+     * @Route("/llave/prestar", name="llave_prestar", methods={"GET", "POST"})
+     */
+    public function prestarAction(Request $request)
+    {
+        $prestamo = new Prestamo();
+        $form = $this->createForm(PrestamoType::class, $prestamo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $prestamo->getLlave()->setUsuario($prestamo->getUsuario());
+                $prestamo->getLlave()->setFechaPrestamo(new \DateTime());
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $this->addFlash('success', 'Llave prestada con éxito');
+                return $this->redirectToRoute('llave_listar');
+            }
+            catch(\Exception $e) {
+                $this->addFlash('error', 'Ha ocurrido al prestar la llave');
+            }
+        }
+        return $this->render('llave/prestar_form.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }

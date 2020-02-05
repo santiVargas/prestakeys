@@ -5,7 +5,11 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Llaves {% if is_granted('ROLE_SECRETARIO') %}<a href="{{ path('llave_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva llave</a>{% endif %}</h1>
+    <h1>Llaves</h1>
+    <p>
+        <a href="{{ path('llave_prestar') }}" class="btn btn-primary"><i class="fa fa-angle-double-up"></i> Prestar llave</a>
+        {% if is_granted('ROLE_SECRETARIO') %}<a href="{{ path('llave_nueva') }}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva llave</a>{% endif %}
+    </p>
 
     {% if is_granted('ROLE_SECRETARIO') %}
     <div class="btn-group filtros">
