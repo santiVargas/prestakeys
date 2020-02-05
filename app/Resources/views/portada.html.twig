@@ -2,6 +2,34 @@
 
 {% block content %}
     <h1>¡Bienvenido a PrestaKeys!</h1>
+
+    {% if app.user %}
+        {% if app.user.llavesPrestadas|length  > 0 %}
+            <h2>Tienes préstamos activos</h2>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Cód. llave</th>
+                        <th>Descripción</th>
+                        <th>Dependencia</th>
+                        <th>Fecha del préstamo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for llave in app.user.llavesPrestadas %}
+                        <tr>
+                            <td>{{ llave.codigo }}</td>
+                            <td>{{ llave.descripcion }}</td>
+                            <td>{{ llave.dependencia }}</td>
+                            <td>{{ llave.fechaPrestamo|date('d/m/Y') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h2>No tienes préstamos activos</h2>
+        {% endif %}
+    {% endif %}
 {% endblock %}
 
 {% block title %}
