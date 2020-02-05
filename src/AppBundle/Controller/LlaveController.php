@@ -21,15 +21,19 @@ class LlaveController extends Controller
      */
     public function indexAction(LlaveRepository $llaveRepository, $filtro = 0)
     {
+        if ($filtro !== 0 && $this->isGranted('ROLE_SECRETARIO') === false) {
+            throw $this->createAccessDeniedException();
+        }
+
         switch ($filtro) {
             case 0:
-                $llaves = $llaveRepository->findAllOrdenadasPorCodigo();
-                break;
-            case 1:
                 $llaves = $llaveRepository->findPrestadasOrdenadasPorCodigo();
                 break;
-            case 2:
+            case 1:
                 $llaves = $llaveRepository->findNoPrestadasOrdenadasPorCodigo();
+                break;
+            case 2:
+                $llaves = $llaveRepository->findAllOrdenadasPorCodigo();
                 break;
         }
 
@@ -40,6 +44,7 @@ class LlaveController extends Controller
     }
     /**
      * @Route("/llave/nueva", name="llave_nueva", methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_SECRETARIO')")
      */
     public function nuevaAction(Request $request)
     {
@@ -53,6 +58,7 @@ class LlaveController extends Controller
     /**
      * @Route("/llave/{id}", name="llave_form",
      *     requirements={"id"="\d+"}, methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_SECRETARIO')")
      */
     public function formAction(Request $request, Llave $llave)
     {
@@ -80,6 +86,7 @@ class LlaveController extends Controller
 
     /**
      * @Route("/llave/eliminar/{id}", name="llave_eliminar", methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_SECRETARIO')")
      */
     public function eliminarAction(Request $request, Llave $llave)
     {
