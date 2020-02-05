@@ -107,4 +107,27 @@ class LlaveController extends Controller
             'llave' => $llave
         ]);
     }
+
+    /**
+     * @Route("/llave/devolver/{id}", name="llave_devolver", methods={"GET", "POST"})
+     */
+    public function devolverAction(Request $request, Llave $llave)
+    {
+        if ($request->getMethod() == 'POST') {
+            try {
+                $llave->setFechaPrestamo(null);
+                $llave->setUsuario(null);
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash('success', 'Llave devuelta con éxito');
+                return $this->redirectToRoute('llave_listar');
+            }
+            catch (\Exception $e) {
+                $this->addFlash('error', 'Ha ocurrido un error al devolver la llave');
+                return $this->redirectToRoute('llave_listar');
+            }
+        }
+        return $this->render('llave/devolver.html.twig', [
+            'llave' => $llave
+        ]);
+    }
 }
