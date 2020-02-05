@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Usuario;
+use AppBundle\Form\Type\MiUsuarioType;
 use AppBundle\Form\Type\UsuarioType;
 use AppBundle\Repository\UsuarioRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -10,14 +11,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @Security("is_granted('ROLE_SECRETARIO')")
- */
 class UsuarioController extends Controller
 {
-
     /**
      * @Route("/usuarios", name="usuario_listar")
+     * @Security("is_granted('ROLE_SECRETARIO')")
      */
     public function indexAction(UsuarioRepository $usuarioRepository)
     {
@@ -27,6 +25,7 @@ class UsuarioController extends Controller
             'usuarios' => $usuarios
         ]);
     }
+
     /**
      * @Route("/usuario/nuevo", name="usuario_nuevo", methods={"GET", "POST"})
      * @Security("is_granted('ROLE_SECRETARIO')")
@@ -43,6 +42,7 @@ class UsuarioController extends Controller
     /**
      * @Route("/usuario/{id}", name="usuario_form",
      *     requirements={"id"="\d+"}, methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_SECRETARIO')")
      */
     public function formAction(Request $request, Usuario $usuario)
     {
@@ -68,6 +68,7 @@ class UsuarioController extends Controller
 
     /**
      * @Route("/usuario/eliminar/{id}", name="usuario_eliminar", methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_SECRETARIO')")
      */
     public function eliminarAction(Request $request, Usuario $usuario)
     {
@@ -85,6 +86,35 @@ class UsuarioController extends Controller
             }
         }
         return $this->render('usuario/eliminar.html.twig', [
+            'usuario' => $usuario
+        ]);
+    }
+
+
+    /**
+     * @Route("/perfil", name="usuario_perfil",
+     *                      methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function perfilAction(Request $request)
+    {
+        $usuario = $this->getUser();
+        $form = $this->createForm(MiUsuarioType::class, $usuario);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $this->addFlash('success', 'Cambios en el usuario guardados con éxito');
+                return $this->redirectToRoute('portada');
+            }
+            catch(\Exception $e) {
+                $this->addFlash('error', 'Ha ocurrido un error al guardar los cambios');
+            }
+        }
+        return $this->render('usuario/perfil_form.html.twig', [
+            'formulario' => $form->createView(),
             'usuario' => $usuario
         ]);
     }
