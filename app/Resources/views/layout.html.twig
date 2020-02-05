@@ -8,15 +8,19 @@
             <li{% if nombre == 'portada' %} class="active"{% endif %}>
                 <a class="nav-link" href="{{ path('portada') }}"><i class="fas fa-home"></i> Portada</a>
             </li>
+            {% if is_granted('ROLE_GESTOR_PRESTAMOS') %}
             <li{% if nombre starts with 'llave' %} class="active"{% endif %}>
                 <a class="nav-link" href="{{ path('llave_listar') }}"><i class="fas fa-key"></i> Llaves</a>
             </li>
+            {% endif %}
+            {% if is_granted('ROLE_USER') %}
             <li{% if nombre starts with 'dependencia' %} class="active"{% endif %}>
                 <a class="nav-link" href="{{ path('dependencia_listar') }}"><i class="fas fa-door-open"></i> Dependencias</a>
             </li>
             <li{% if nombre starts with 'usuario' %} class="active"{% endif %}>
                 <a class="nav-link" href="{{ path('usuario_listar') }}"><i class="fas fa-users"></i> Usuarios</a>
             </li>
+            {% endif %}
         </ul>
         {% if app.user %}
             <span class="navbar-text">¡Hola {{ app.user.nombre }}!</span>

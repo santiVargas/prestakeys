@@ -6,12 +6,15 @@ use AppBundle\Entity\Llave;
 use AppBundle\Form\Type\LlaveType;
 use AppBundle\Repository\LlaveRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Security("is_granted('ROLE_GESTOR_PRESTAMOS')")
+ */
 class LlaveController extends Controller
 {
-
     /**
      * @Route("/llaves/{filtro}", name="llave_listar",
      *      requirements={"filtro": "0|1|2"})

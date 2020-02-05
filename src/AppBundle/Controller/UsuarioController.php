@@ -6,9 +6,13 @@ use AppBundle\Entity\Usuario;
 use AppBundle\Form\Type\UsuarioType;
 use AppBundle\Repository\UsuarioRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Security("is_granted('ROLE_USER')")
+ */
 class UsuarioController extends Controller
 {
 
@@ -25,6 +29,7 @@ class UsuarioController extends Controller
     }
     /**
      * @Route("/usuario/nuevo", name="usuario_nuevo", methods={"GET", "POST"})
+     * @Security("is_granted('ROLE_SECRETARIO')")
      */
     public function nuevoAction(Request $request)
     {
