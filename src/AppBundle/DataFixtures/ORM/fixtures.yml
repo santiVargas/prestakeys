@@ -30,6 +30,13 @@ AppBundle\Entity\Usuario:
     apellidos: Gotera Gotera
     ordenanza: true
     secretario: false
+  docente_{1..10}:
+    nombreUsuario: docente<current()>
+    clave: <codificaClave('docente')>
+    nombre: <es_ES:firstName()>
+    apellidos: '<es_ES:lastName()> <es_ES:lastName()>'
+    ordenanza: false
+    secretario: false
   ordenanza_{1..3}:
     nombreUsuario: ordenanza<current()>
     clave: <codificaClave('ordenanza')>
