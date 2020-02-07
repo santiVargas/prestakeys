@@ -12,6 +12,7 @@
     {{ form_widget(formulario) }}
     <a href="{{ path('portada') }}" class="btn btn-info"><i class="fa fa-arrow-left"></i> Volver al listado</a>
     <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Guardar cambios</button>
+    <a href="{{ path('usuario_cambiar_clave') }}" class="btn btn-warning"><i class="fa fa-key"></i> Cambiar contraseña</a>
     {{ form_end(formulario) }}
 {% endblock %}
 
